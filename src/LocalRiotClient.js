@@ -1,7 +1,7 @@
 //@ts-nocheck
 const axios = require('axios').default;
-import * as fs from 'fs';
-import * as https from 'https';
+const fs = require('fs');
+const https = require('https');
 
 class LocalRiotClientAPI {
 
@@ -49,7 +49,7 @@ class LocalRiotClientAPI {
 
     }
 
-    static gameOpen() : boolean {
+    static gameOpen() {
 
         const lockFile = this.parseLockFile();
         if(lockFile != "No File found") {
@@ -118,6 +118,12 @@ class LocalRiotClientAPI {
 
     getCredentials() {
         return this.axios.get("/entitlements/v1/token")
+    }
+
+    getServerRegion() {
+        return this.axios.post("player-affinity/product/v1/token", {
+            product: "valorant"
+        });
     }
 
 }
