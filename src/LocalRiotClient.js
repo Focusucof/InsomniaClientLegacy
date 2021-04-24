@@ -65,8 +65,7 @@ class LocalRiotClientAPI {
 
     static parseLockFile() {
     
-        const path = `${process.env.LOCALAPPDATA}\\Riot Games\\Riot Client\\Config\\lockfile`;
-        console.log(path);      
+        const path = `${process.env.LOCALAPPDATA}\\Riot Games\\Riot Client\\Config\\lockfile`;     
 
         // read lockfile
         if(fs.existsSync(path)) {

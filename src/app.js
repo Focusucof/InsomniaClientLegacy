@@ -141,6 +141,19 @@ app.get("/party/v1/create", async (req, res) => {
 
         });
 
+        await axios.post(`https://glz-${region}-1.${region}.a.pvp.net/parties/v1/parties/${partyInfo.CurrentPartyID}/makecustomgame`, {}, {
+            
+            headers: {
+
+                "Authorization": `Bearer ${userDetails.accessToken}`,
+                "X-Riot-Entitlements-JWT": userDetails.token,
+                "X-Riot-ClientPlatform": "ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9",
+                "X-Riot-ClientVersion":  clientVersion
+
+            }
+
+        });
+
         var partyOpen;
         await axios.post(`https://glz-${region}-1.${region}.a.pvp.net/parties/v1/parties/${partyInfo.CurrentPartyID}/accessibility`, {Accessibility: "OPEN"}, {
             
