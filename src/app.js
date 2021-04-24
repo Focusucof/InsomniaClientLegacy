@@ -23,7 +23,7 @@ app.get("/party/v1/join/:id", async (req, res) => {
 
     }).catch(err => {
 
-        res.send(400);
+        res.sendStatus(400);
 
     });
 
@@ -36,7 +36,7 @@ app.get("/party/v1/join/:id", async (req, res) => {
 
         }).catch(error => {
 
-            res.send(400);
+            res.sendStatus(400);
 
         });
 
@@ -47,17 +47,17 @@ app.get("/party/v1/join/:id", async (req, res) => {
                 "Authorization": `Bearer ${userDetails.accessToken}`,
                 "X-Riot-Entitlements-JWT": userDetails.token,
                 "X-Riot-ClientPlatform": "ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9",
-                "X-Riot-ClientVersion":  "release-02.05-shipping-3-531230"
+                "X-Riot-ClientVersion":  clientVersion
             }
 
         }).then(response => {
             partyInfo = response.data;
         }).catch(error => {
-            res.send(400);
+            res.sendStatus(400);
         });
 
         var joinSuccess;
-        await axios.post(`https://glz-${region}}-1.${region}.a.pvp.net/parties/v1/players/${userDetails.subject}/joinparty/${partyID}`, {}, {
+        await axios.post(`https://glz-${region}-1.${region}.a.pvp.net/parties/v1/players/${userDetails.subject}/joinparty/${partyID}`, {}, {
             headers: {
                 "Authorization": `Bearer ${userDetails.accessToken}`,
                 "X-Riot-Entitlements-JWT": userDetails.token,
@@ -68,11 +68,11 @@ app.get("/party/v1/join/:id", async (req, res) => {
             joinSuccess = true;
         }).catch(error => {
             if(error.response.status == 404) {
-                res.send(404)
+                res.sendStatus(404)
                 joinSuccess = false;
             } else {
                 joinSuccess = false;
-                res.send(400);
+                res.sendStatus(400);
             }
         });
 
@@ -82,7 +82,7 @@ app.get("/party/v1/join/:id", async (req, res) => {
                 partyID: partyInfo.CurrentPartyID
             }
             
-            res.send(200).send(json);
+            res.sendStatus(200).send(json);
 
         }
 
@@ -104,7 +104,7 @@ app.get("/party/v1/create", async (req, res) => {
     }).catch(error => {
 
         credSuccess = false;
-        res.send(400);
+        res.sendStatus(400);
 
     }); 
 
@@ -117,7 +117,7 @@ app.get("/party/v1/create", async (req, res) => {
 
         }).catch(error => {
 
-            res.send(400);
+            res.sendStatus(400);
 
         });
 
@@ -137,7 +137,7 @@ app.get("/party/v1/create", async (req, res) => {
 
         }).catch(error => {
 
-            res.send(400);
+            res.sendStatus(400);
 
         });
 
@@ -185,7 +185,7 @@ app.get("/party/v1/create", async (req, res) => {
 
             }
 
-            res.status(200).send(json);
+            res.sendStatus(200).send(json);
 
         } 
 
