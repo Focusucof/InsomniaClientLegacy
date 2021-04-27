@@ -82,7 +82,7 @@ app.get("/party/v1/join/:id", async (req, res) => {
                 partyID: partyInfo.CurrentPartyID
             }
             
-            res.sendStatus(200).send(json);
+            res.send(json);
 
         }
 
@@ -185,7 +185,7 @@ app.get("/party/v1/create", async (req, res) => {
 
             }
 
-            res.sendStatus(200).send(json);
+            res.status(200).send(json);
 
         } 
 

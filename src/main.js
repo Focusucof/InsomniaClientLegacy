@@ -5,26 +5,28 @@ const path = require('path')
 const loadApp = require('./app.js');
 
 function createWindow () {
-  const win = new BrowserWindow({
-    width: 1280,
-    height: 720,
-  })
+    const win = new BrowserWindow({
+        width: 1280,
+        height: 720,
+        frame: false,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
 
-  win.loadFile(path.join(__dirname, 'index.html'))
+    win.loadFile(path.join(__dirname, 'index.html'))
 }
 
 app.whenReady().then(() => {
-  createWindow()
+    createWindow()
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
-    }
-  })
-})
+    app.on('activate', () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow()
+        }
+    });
+});
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+    app.quit();
+});
