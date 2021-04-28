@@ -1,4 +1,4 @@
-# ValScrim is a scrim client for the Insomnia Scrims Discord server
+# ValScrim
 
 ValScrim(temporary name) is a scrim client for the Insomnia Scrims Discord server
 
