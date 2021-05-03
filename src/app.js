@@ -1,8 +1,8 @@
 const LocalRiotClientAPI = require('./LocalRiotClient.js');
 const localRiotClient = LocalRiotClientAPI.initFromLockFile();
+const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
-const LocalRiotWebSocket = require('./LocalRiotWebSocket.js');
 
 const app = express();
 app.use(cors());
@@ -197,15 +197,15 @@ app.get("/party/v1/create", async (req, res) => {
 const port = 1337;
 app.listen(port, () => {console.log(`App running on port ${port}`)});
 
-async function updateParty() {
+/*async function updateParty() {
 
     let lockfile = await LocalRiotClientAPI.parseLockFile();
     const ws = new LocalRiotWebSocket(`wss://riot:${lockfile.password}@localhost:${lockfile.port}/`);
 
     ws.on('open', () => {
-        ws.subscribe('OnJsonApiEvent', console.log);
+        ws.subscribe('OnJsonApiEvent_agent_v1_session', console.log);
     });
 
 }
 
-updateParty()
+updateParty()*/

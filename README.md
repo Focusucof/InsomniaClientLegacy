@@ -1,6 +1,6 @@
 # ValScrim
 
-ValScrim(temporary name) is a scrim client for the Insomnia Scrims Discord server
+The Insomnia Client is the the client used to handle parties in the Insomnia scrims discord.
 
 
 # Legal
