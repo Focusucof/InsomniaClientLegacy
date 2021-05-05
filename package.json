@@ -19,6 +19,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "nexe": "^4.0.0-beta.18",
     "pkg": "^5.1.0"
   }
 }
