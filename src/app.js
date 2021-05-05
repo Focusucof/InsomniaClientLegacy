@@ -3,10 +3,24 @@ const localRiotClient = LocalRiotClientAPI.initFromLockFile();
 const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
+const readline = require('readline-sync');
+const favicon = require('serve-favicon');
 
 const app = express();
 app.use(cors());
+app.use(favicon('./resources/favicon.ico'));
 
+console.log('\x1b[95m ___                                 _       ');
+console.log('|_ _|_ __  ___  ___  _ __ ___  _ __ (_) __ _ ');
+console.log(' | || \'_ \\/ __|/ _ \\| \'_ \` _ \\| \'_ \\| |/ _\` |');
+console.log(' | || | | \\__ \\ (_) | | | | | | | | | | (_| |');
+console.log('|___|_| |_|___/\\___/|_| |_| |_|_| |_|_|\\__,_|');
+
+if(localRiotClient == 'No File Found') { //////////////////////////////////////////////////////
+    console.log('\x1b[0\nmValorant is not currently running...');
+    readline.question('Press \x1b[96mENTER\x1b[0m' +' to quit');
+    return;
+}
 
 var clientVersion = "release-02.07-shipping-6-546329";
 
@@ -83,7 +97,110 @@ app.get("/party/v1/join/:id", async (req, res) => {
                 partyID: partyInfo.CurrentPartyID
             }
             
-            res.send(json);
+            res.send(`
+            
+            <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Insomnia</title>
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+        </head>
+        <body>
+            <div class="main">       
+<pre> 
+ ___                                 _       
+|_ _|_ __  ___  ___  _ __ ___  _ __ (_) __ _ 
+ | || \'_ \\/ __|/ _ \\| '_ \` _ \\| '_ \\| |/ _\` |
+ | || | | \\__ \\ (_) | | | | | | | | | | (_| |
+|___|_| |_|___/\\___/|_| |_| |_|_| |_|_|\\__,_|
+</pre>
+
+                <p>You have successfully joined the party</p>
+                <p style="color: aqua;">You may close this window</p>
+
+                
+            </div>
+
+            <style>
+                * {
+                    font-family: 'Raleway', sans-serif;
+                    background-color: #18191c;
+                    color: white;
+                }
+
+                p {
+                    text-align: center;
+                }
+
+                h3 {
+                    text-align: center;
+                }
+
+                body {
+                    position: absolute;
+                    left: 50%;
+                    top: 40%;
+                    -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                }
+
+                button {
+                    position: absolute;
+                    left: 50%;
+                    top: 105%;
+                    -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                }
+
+                .hover {
+                    /* font */
+                    color: white;
+                    font-size: 20px;
+                    font-family: 'Raleway';
+                    
+                    /* remove blue underline */
+                    text-decoration: none;
+                    
+                    /* border */
+                    border: 2px solid #18191c;
+                    border-radius: 20px;
+                    
+                    /* transitions */
+                    transition-duration: .2s;
+                    -webkit-transition-duration: .2s;
+                    -moz-transition-duration: .2s;
+                    
+                    /* other */
+                    background-color: #18191c;
+                    padding: 4px 30px;
+                }
+
+                .hover:hover {
+                    /* update text color and background color */
+                    color: #18191c;
+                    background-color:white;
+                    
+                    /* transitions */
+                    transition-duration: .2s;
+                    -webkit-transition-duration: .11s;
+                    -moz-transition-duration: .2s;
+                }
+
+                .hover:active {
+                    background-color: cyan; 
+                }
+
+                pre {
+                    font-family: Consolas;
+                    font-size: 20pt;
+                    color: #f45397;
+                }
+            </style>
+        </body>
+    </html>
+            
+            `);
 
         }
 
@@ -180,13 +297,136 @@ app.get("/party/v1/create", async (req, res) => {
 
         if(partyOpen == true) {
 
-            var json = {
+            res.send(`
 
-                partyID: partyInfo.CurrentPartyID
+            <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Insomnia</title>
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+        </head>
+        <body>
+            <div class="main">       
+<pre> 
+ ___                                 _       
+|_ _|_ __  ___  ___  _ __ ___  _ __ (_) __ _ 
+ | || '_ \\/ __|/ _ \\| '_ \` _ \\| '_ \\| |/ _\` |
+ | || | | \\__ \\ (_) | | | | | | | | | | (_| |
+|___|_| |_|___/\\___/|_| |_| |_|_| |_|_|\\__,_|
+</pre>
 
-            }
+                <p>Your party has been created</p>
+                <button class="hover" onclick="copy()">Copy</button>
+                <h3 id="partyID">${partyInfo.CurrentPartyID}</h3>
+                
+            </div>
 
-            res.status(200).send(json);
+            <script>
+                function copy() {
+                    if (window.getSelection) {
+                        if (window.getSelection().empty) { // Chrome
+                            window.getSelection().empty();
+                        } else if (window.getSelection().removeAllRanges) { // Firefox
+                            window.getSelection().removeAllRanges();
+                        }
+                    } else if (document.selection) { // IE?
+                        document.selection.empty();
+                    }
+
+                    if (document.selection) {
+                        var range = document.body.createTextRange();
+                        range.moveToElementText(document.getElementById("partyID"));
+                        range.select().createTextRange();
+                        document.execCommand("copy");
+                    } else if (window.getSelection) {
+                        var range = document.createRange();
+                        range.selectNode(document.getElementById("partyID"));
+                        window.getSelection().addRange(range);
+                        document.execCommand("copy");
+                    }
+                }
+            </script>
+
+            <style>
+                * {
+                    font-family: 'Raleway', sans-serif;
+                    background-color: #18191c;
+                    color: white;
+                }
+
+                p {
+                    text-align: center;
+                }
+
+                h3 {
+                    text-align: center;
+                }
+
+                body {
+                    position: absolute;
+                    left: 50%;
+                    top: 40%;
+                    -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                }
+
+                button {
+                    position: absolute;
+                    left: 50%;
+                    top: 105%;
+                    -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                }
+
+                .hover {
+                    /* font */
+                    color: white;
+                    font-size: 20px;
+                    font-family: 'Raleway';
+                    
+                    /* remove blue underline */
+                    text-decoration: none;
+                    
+                    /* border */
+                    border: 2px solid #18191c;
+                    border-radius: 20px;
+                    
+                    /* transitions */
+                    transition-duration: .2s;
+                    -webkit-transition-duration: .2s;
+                    -moz-transition-duration: .2s;
+                    
+                    /* other */
+                    background-color: #18191c;
+                    padding: 4px 30px;
+                }
+
+                .hover:hover {
+                    /* update text color and background color */
+                    color: #18191c;
+                    background-color:white;
+                    
+                    /* transitions */
+                    transition-duration: .2s;
+                    -webkit-transition-duration: .11s;
+                    -moz-transition-duration: .2s;
+                }
+
+                .hover:active {
+                    background-color: cyan; 
+                }
+
+                pre {
+                    font-family: Consolas;
+                    font-size: 20pt;
+                    color: #f45397;
+                }
+            </style>
+        </body>
+    </html>
+            
+            `)
 
         } 
 
@@ -195,17 +435,4 @@ app.get("/party/v1/create", async (req, res) => {
 });
 
 const port = 1337;
-app.listen(port, () => {console.log(`App running on port ${port}`)});
-
-/*async function updateParty() {
-
-    let lockfile = await LocalRiotClientAPI.parseLockFile();
-    const ws = new LocalRiotWebSocket(`wss://riot:${lockfile.password}@localhost:${lockfile.port}/`);
-
-    ws.on('open', () => {
-        ws.subscribe('OnJsonApiEvent_agent_v1_session', console.log);
-    });
-
-}
-
-updateParty()*/
+app.listen(port, () => {console.log(`\x1b[96mApp running on port ${port}\x1b[0m`)});

@@ -3,16 +3,22 @@
   "version": "1.0.0",
   "description": "Headless scrim client for the Insomnia scrims discord",
   "main": "src/app.js",
+  "bin": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ."
+    "start": "node .",
+    "build": "pkg . --target win"
   },
   "author": "Focus",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "readline-sync": "^1.4.10",
+    "serve-favicon": "^2.5.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "pkg": "^5.1.0"
+  }
 }

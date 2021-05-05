@@ -36,7 +36,7 @@ class LocalRiotClientAPI {
     static initFromLockFile() {
 
         const lockFile = this.parseLockFile();
-        if(lockFile != "No File found") {
+        if(lockFile != "No File Found") {
 
             return new LocalRiotClientAPI('riot', lockFile.password, lockFile.port);
 
@@ -51,7 +51,7 @@ class LocalRiotClientAPI {
     static gameOpen() {
 
         const lockFile = this.parseLockFile();
-        if(lockFile != "No File found") {
+        if(lockFile != "No File Found") {
 
             return true;
 
@@ -92,7 +92,7 @@ class LocalRiotClientAPI {
 
         } else {
 
-            return "No File found";
+            return "No File Found";
 
         }
 

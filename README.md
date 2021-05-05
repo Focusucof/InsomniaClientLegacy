@@ -1,6 +1,11 @@
 # ValScrim
 
-The Insomnia Client is the the client used to handle parties in the Insomnia scrims discord.
+The Insomnia Client is a headless client that is integrated with the Insomnia Discord bot. It makes hosting parties easy and joining them even easier.
+
+## Features
+
+- Join parties without needed to be friends
+- Integration with the Insomnia scrims Discord bot
 
 
 # Legal
