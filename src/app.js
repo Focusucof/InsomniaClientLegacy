@@ -106,7 +106,7 @@ app.get("/party/v1/join/:id", async (req, res) => {
             <title>Insomnia</title>
             <link rel="preconnect" href="https://fonts.gstatic.com">
             <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-            <link rel="shortcut icon" href="https://raw.githubusercontent.com/Focusucof/InsomniaClient/headless/resources/favicon.ico">
+            <link rel="icon" href="https://raw.githubusercontent.com/Focusucof/InsomniaClient/headless/resources/favicon.ico">
         </head>
         <body>
             <div class="main">       
@@ -307,7 +307,7 @@ app.get("/party/v1/create", async (req, res) => {
             <title>Insomnia</title>
             <link rel="preconnect" href="https://fonts.gstatic.com">
             <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-            <link rel="shortcut icon" href="https://raw.githubusercontent.com/Focusucof/InsomniaClient/headless/resources/favicon.ico">
+            <link rel="icon" href="https://raw.githubusercontent.com/Focusucof/InsomniaClient/headless/resources/favicon.ico">
         </head>
         <body>
             <div class="main">       
