@@ -4,8 +4,9 @@ compile({
     input: '../src/app.js',
     output: 'InsomniaClient.exe',
     build: true,
-    ico: 'INS.ico',
-    target: 'win32-x64-12.22.1'
+    ico: './build/INS.ico',
+    target: 'win32-x64-12.22.1',
+    loglevel: 'verbose',
 }).then(() => {
     console.log('Success')
 }).catch(e => {

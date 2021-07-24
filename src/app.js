@@ -8,7 +8,8 @@ const favicon = require('serve-favicon');
 
 const app = express();
 app.use(cors());
-app.use(favicon('./resources/favicon.ico'));
+//app.use(favicon('./resources/favicon.ico'));
+
 
 console.log('\x1b[95m ___                                 _       ');
 console.log('|_ _|_ __  ___  ___  _ __ ___  _ __ (_) __ _ ');
@@ -105,6 +106,7 @@ app.get("/party/v1/join/:id", async (req, res) => {
             <title>Insomnia</title>
             <link rel="preconnect" href="https://fonts.gstatic.com">
             <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+            <link rel="shortcut icon" href="https://raw.githubusercontent.com/Focusucof/InsomniaClient/headless/resources/favicon.ico">
         </head>
         <body>
             <div class="main">       
@@ -305,6 +307,7 @@ app.get("/party/v1/create", async (req, res) => {
             <title>Insomnia</title>
             <link rel="preconnect" href="https://fonts.gstatic.com">
             <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+            <link rel="shortcut icon" href="https://raw.githubusercontent.com/Focusucof/InsomniaClient/headless/resources/favicon.ico">
         </head>
         <body>
             <div class="main">       
