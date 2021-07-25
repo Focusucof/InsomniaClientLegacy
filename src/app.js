@@ -4,11 +4,9 @@ const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
 const readline = require('readline-sync');
-const favicon = require('serve-favicon');
 
 const app = express();
 app.use(cors());
-//app.use(favicon('./resources/favicon.ico'));
 
 
 console.log('\x1b[95m ___                                 _       ');
