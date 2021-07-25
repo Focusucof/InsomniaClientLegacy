@@ -41,6 +41,14 @@ jobs:
       - name: setup-msbuild
         uses: microsoft/setup-msbuild@v1
         
+      - name: Visual Studio shell
+        # You may pin to the exact commit or the version.
+        # uses: egor-tensin/vs-shell@2cef0a902be6c2434178a0d0e4d83ae07a9dd0e0
+        uses: egor-tensin/vs-shell@v2
+        with:
+          # Target architecture
+          arch: x64
+        
       # Runs a set of commands using the runners shell
       - name: Run Build Script
         run: npm run build
