@@ -26,7 +26,7 @@ class LocalRiotClientAPI {
             headers: {
                 'Authorization': `Basic ${this.authorization}`,
                 "user-agent": "ShooterGame/21 Windows/10.0.19042.1.768.64bit",
-                "X-Riot-ClientVersion": "release-02.03-shipping-8-521855",
+                "X-Riot-ClientVersion": "release-03.02-shipping-5-584286",
                 "Content-Type": "application/json",
                 "rchat-blocking": "true"
             },

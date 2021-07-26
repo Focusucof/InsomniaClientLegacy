@@ -24,7 +24,7 @@ if(!localRiotClient == false) {
     process.exit(0);
 }
 
-var clientVersion = "release-02.07-shipping-6-546329";
+var clientVersion = "release-03.02-shipping-5-584286";
 
 //joining logic
 app.get("/party/v1/join/:id", async (req: any, res: any) => {
