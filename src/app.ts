@@ -1,41 +1,46 @@
-const LocalRiotClientAPI = require('./LocalRiotClient.js');
-const localRiotClient = LocalRiotClientAPI.initFromLockFile();
-const axios = require('axios');
-const express = require('express');
-const cors = require('cors');
-const readline = require('readline-sync');
+import LocalRiotClientAPI from './LocalRiotClient';
+import axios from 'axios';
+import express from 'express';
+import cors from 'cors';
+import * as readline from 'readline-sync';
 
+const localRiotClient = LocalRiotClientAPI.initFromLockFile();
 const app = express();
 app.use(cors());
 
-
+/************************HEADER************************/
 console.log('\x1b[95m ___                                 _       ');
 console.log('|_ _|_ __  ___  ___  _ __ ___  _ __ (_) __ _ ');
 console.log(' | || \'_ \\/ __|/ _ \\| \'_ \` _ \\| \'_ \\| |/ _\` |');
 console.log(' | || | | \\__ \\ (_) | | | | | | | | | | (_| |');
 console.log('|___|_| |_|___/\\___/|_| |_| |_|_| |_|_|\\__,_|');
+/******************************************************/
 
-if(localRiotClient == 'No File Found') { //////////////////////////////////////////////////////
+if(!localRiotClient == false) {
     console.log('\x1b[0\nmValorant is not currently running...');
     readline.question('Press \x1b[96mENTER\x1b[0m' +' to quit');
-    return;
+
+    //exit code zero to prevent logging to console
+    process.exit(0);
 }
 
 var clientVersion = "release-02.07-shipping-6-546329";
 
 //joining logic
-app.get("/party/v1/join/:id", async (req, res) => {
+app.get("/party/v1/join/:id", async (req: any, res: any) => {
+
+    console.log(typeof(req.params));
 
     var partyID = req.params.id;
-    var userDetails;
-    var credSuccess;
+    var userDetails: any = {};
+    var credSuccess: boolean = false;
 
-    await localRiotClient.getCredentials().then(response => {
+    await localRiotClient.getCredentials().then((response: any) => {
 
         credSuccess = true;
         userDetails = response.data;
 
-    }).catch(err => {
+    }).catch((err: object) => {
 
         res.sendStatus(400);
 
@@ -44,17 +49,17 @@ app.get("/party/v1/join/:id", async (req, res) => {
     if(credSuccess) {
 
         var region;
-        await localRiotClient.getServerRegion().then(response => {
+        await localRiotClient.getServerRegion().then((response: any) => {
 
             region = response.data.affinities.live;
 
-        }).catch(error => {
+        }).catch((error: any) => {
 
             res.sendStatus(400);
 
         });
 
-        var partyInfo;
+        var partyInfo: any = {};
         await axios.get(`https://glz-${region}-1.${region}.a.pvp.net/parties/v1/players/${userDetails.subject}`, {
 
             headers: {
@@ -64,9 +69,9 @@ app.get("/party/v1/join/:id", async (req, res) => {
                 "X-Riot-ClientVersion":  clientVersion
             }
 
-        }).then(response => {
+        }).then((response: any) => {
             partyInfo = response.data;
-        }).catch(error => {
+        }).catch((error: object) => {
             res.sendStatus(400);
         });
 
@@ -78,9 +83,9 @@ app.get("/party/v1/join/:id", async (req, res) => {
                 "X-Riot-ClientPlatform": "ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9",
                 "X-Riot-ClientVersion":  clientVersion
             }
-        }).then(response => {
+        }).then((response: any) => {
             joinSuccess = true;
-        }).catch(error => {
+        }).catch((error: any) => {
             if(error.response.status == 404) {
                 res.sendStatus(404)
                 joinSuccess = false;
@@ -209,17 +214,17 @@ app.get("/party/v1/join/:id", async (req, res) => {
 });
 
 //create logic
-app.get("/party/v1/create", async (req, res) => {
+app.get("/party/v1/create", async (req: any, res: any) => {
 
-    var userDetails;
-    var credSuccess;
+    var userDetails: any = {};
+    var credSuccess: boolean = false;
 
-    await localRiotClient.getCredentials().then(response => {
+    await localRiotClient.getCredentials().then((response: any) => {
         
         credSuccess = true;
         userDetails = response.data;
 
-    }).catch(error => {
+    }).catch((error: object) => {
 
         credSuccess = false;
         res.sendStatus(400);
@@ -229,17 +234,17 @@ app.get("/party/v1/create", async (req, res) => {
     if(credSuccess) {
 
         var region;
-        await localRiotClient.getServerRegion().then(response => {
+        await localRiotClient.getServerRegion().then((response: any) => {
 
             region = response.data.affinities.live;
 
-        }).catch(error => {
+        }).catch((error: object) => {
 
             res.sendStatus(400);
 
         });
 
-        var partyInfo;
+        var partyInfo: any = {};
         await axios.get(`https://glz-${region}-1.${region}.a.pvp.net/parties/v1/players/${userDetails.subject}`, {
 
             headers: {
@@ -249,11 +254,11 @@ app.get("/party/v1/create", async (req, res) => {
                 "X-Riot-ClientVersion":  clientVersion
             }
 
-        }).then(response => {
+        }).then((response: any) => {
 
             partyInfo = response.data;
 
-        }).catch(error => {
+        }).catch((error: object) => {
 
             res.sendStatus(400);
 
@@ -284,11 +289,11 @@ app.get("/party/v1/create", async (req, res) => {
 
             }
 
-        }).then(response => {
+        }).then((response: any) => {
 
             partyOpen = true;
 
-        }).catch(error => {
+        }).catch((error: object) => {
 
             partyOpen = false;
             res.sendStatus(400);

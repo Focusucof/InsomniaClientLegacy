@@ -2,10 +2,6 @@ import axios from 'axios';
 import * as fs from 'fs';
 import * as https from 'https';
 
-/* const axios = require('axios').default;
-const fs = require('fs');
-const https = require('https'); */
-
 class LocalRiotClientAPI {
 
     username: string;
@@ -43,16 +39,16 @@ class LocalRiotClientAPI {
 
     }
 
-    static initFromLockFile() : string | LocalRiotClientAPI {
+    static initFromLockFile() : boolean | LocalRiotClientAPI | any {
 
         const lockFile = this.parseLockFile();
-        if(lockFile != "No File Found") {
+        if(lockFile != false) {
 
             return new LocalRiotClientAPI('riot', lockFile.password, lockFile.port);
 
         } else {
 
-            return "No File Found";
+            return false;
 
         }
 
@@ -61,7 +57,7 @@ class LocalRiotClientAPI {
     static gameOpen() : boolean {
 
         const lockFile = this.parseLockFile();
-        if(lockFile != "No File Found") {
+        if(lockFile != false) {
 
             return true;
 
@@ -72,7 +68,7 @@ class LocalRiotClientAPI {
         }
     }
 
-    static parseLockFile() {
+    static parseLockFile() : any {
     
         const path = `${process.env.LOCALAPPDATA}\\Riot Games\\Riot Client\\Config\\lockfile`;     
 
@@ -102,7 +98,7 @@ class LocalRiotClientAPI {
 
         } else {
 
-            return "No File Found";
+            return false;
 
         }
 
@@ -137,3 +133,4 @@ class LocalRiotClientAPI {
 }
 
 module.exports = LocalRiotClientAPI;
+export default LocalRiotClientAPI;
