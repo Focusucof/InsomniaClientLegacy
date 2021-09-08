@@ -4,6 +4,10 @@
   "description": "Headless scrim client for the Insomnia scrims discord",
   "main": "src/app.js",
   "bin": "src/app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Focusucof/InsomniaClient.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",

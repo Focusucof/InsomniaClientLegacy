@@ -16,7 +16,7 @@ console.log(' | || | | \\__ \\ (_) | | | | | | | | | | (_| |');
 console.log('|___|_| |_|___/\\___/|_| |_| |_|_| |_|_|\\__,_|');
 /******************************************************/
 
-if(!localRiotClient == false) {
+if(localRiotClient == false) {
     console.log('\x1b[0\nmValorant is not currently running...');
     readline.question('Press \x1b[96mENTER\x1b[0m' +' to quit');
 
